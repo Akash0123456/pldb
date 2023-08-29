@@ -52,7 +52,8 @@ exports.user_sign_up = (req,res) => {
 
 // Delete a user
 exports.user_delete = (req,res) => {
-    User.remove({_id: req.params.userId})
+    User.deleteOne({_id: req.params.userId})
+        .exec()
         .then((result) => {
             res.status(200).json({
                 message: "User deleted"
