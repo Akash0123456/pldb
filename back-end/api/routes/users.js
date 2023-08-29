@@ -20,5 +20,8 @@ router.post('/signup', userController.user_sign_up);
 // Delete a user
 router.delete('/:userId', userController.user_delete);
 
+// Get all users
+router.get('/', userController.user_get_all);
+
 
 module.exports = router

@@ -65,3 +65,31 @@ exports.user_delete = (req,res) => {
             });
         });
 }
+
+// Get all users
+exports.user_get_all = (req,res) => {
+    User.find()
+        .then((users) => {
+            res.status(200).json({
+                count: users.length,
+                users: users.map((user) => {
+                    return {
+                        _id: user._id,
+                        username: user.username,
+                        email: user.email,
+                        password: user.password,
+                        createdAt: user.createdAt,
+                        request: {
+                            type: "GET",
+                            url: "http://localhost:3000/users/" + user._id
+                        }
+                    }
+                })
+            });
+        })
+        .catch((err) => {
+            res.status(500).json({
+                error: err
+            });
+        });
+}
