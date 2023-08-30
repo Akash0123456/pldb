@@ -1,10 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
+// Require the .env file
+require('dotenv').config();
 
 const app = express()
 
-const dbUri = 'mongodb+srv://akashgampala229:pldb123@cluster0.skh2hkp.mongodb.net/?retryWrites=true&w=majority'
+const dbUri = 'mongodb+srv://akashgampala229:' + process.env.DB_PASSWORD + '@cluster0.skh2hkp.mongodb.net/?retryWrites=true&w=majority'
 
 // Connecting to db
 mongoose.connect(dbUri);
