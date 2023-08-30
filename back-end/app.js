@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
 // Require the .env file
 require('dotenv').config();
 
@@ -13,14 +15,14 @@ mongoose.connect(dbUri);
 
 app.use(bodyParser.json());
 
-// CORS 
+// Middleware that parses incoming requests with urlencoded payloads
+app.use(cookieParser());
 
-// app.use((req, res, next) => {
-//     res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
-//     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-//     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-//     next();
-//   });
+// Middleware that allows for enabling Cross Origin Resource Sharing (CORS)
+app.use(cors({
+    credentials: true,
+    origin: 'http://localhost:4200'
+}));
 
 // Importing routes
 const userRoutes = require('./api/routes/users');

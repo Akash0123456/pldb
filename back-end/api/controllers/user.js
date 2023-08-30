@@ -1,7 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+
+require('dotenv').config();
 
 const User = require('../models/user');
 
@@ -110,9 +112,18 @@ exports.user_login = (req,res) => {
                     }
 
                     if (result) {
+
+                        // Create a token
+                        const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);
+
+                        // Set the token as a cookie
+                        res.cookie('jwt', token, {
+                            httpOnly: true,
+                            maxAge: 24 * 60 * 60 * 1000
+                        })
+
                         return res.status(200).json({
-                            message: "Auth successful",
-                            user: user
+                            message: "Auth successful"
                         })
                     }
 
@@ -132,4 +143,30 @@ exports.user_login = (req,res) => {
             });
         })
 }
+
+// Get request for cookie validation
+
+exports.user_check_auth = async (req,res) => {
+    const cookie = req.cookies['jwt'];
+
+    const claims = jwt.verify(cookie, process.env.JWT_SECRET);
+
+    // Object with the ID of the user.
+    if (!claims) {
+        return res.status(401).json({
+            message: 'Auth failed'
+        })
+    }
+
+    // Find and return relevant user credentials
+    const user = await User.findById(claims.id);
+
+    const response = {
+        username: user.username,
+        email: user.email
+    }
+
+    res.status(200).json(response);
+}
+
         

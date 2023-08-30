@@ -23,9 +23,10 @@ router.delete('/:userId', userController.user_delete);
 // Get all users
 router.get('/', userController.user_get_all);
 
-// Login post request
-
+// Login post request + generate jwt + cookie
 router.post('/login', userController.user_login);
 
+// Get request for cookie validation
+router.get('/checkAuth', userController.user_check_auth);
 
 module.exports = router
