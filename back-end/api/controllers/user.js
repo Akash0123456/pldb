@@ -120,7 +120,16 @@ exports.user_login = (req,res) => {
                         message: "Auth failed"
                     })
                 })
+            } else {
+                return res.status(401).json({
+                    message: 'Auth failed'
+                })
             }
+        })
+        .catch((err) => {
+            res.status(500).json({
+                error: err
+            });
         })
 }
         
