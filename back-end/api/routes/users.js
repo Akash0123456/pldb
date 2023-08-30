@@ -29,4 +29,8 @@ router.post('/login', userController.user_login);
 // Get request for cookie validation
 router.get('/checkAuth', userController.user_check_auth);
 
+// Logout post request + clear cookie
+
+router.post('/logout', userController.user_logout);
+
 module.exports = router

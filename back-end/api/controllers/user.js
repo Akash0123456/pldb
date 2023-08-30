@@ -147,7 +147,8 @@ exports.user_login = (req,res) => {
 // Get request for cookie validation
 
 exports.user_check_auth = async (req,res) => {
-    const cookie = req.cookies['jwt'];
+    try {
+        const cookie = req.cookies['jwt'];
 
     const claims = jwt.verify(cookie, process.env.JWT_SECRET);
 
@@ -167,6 +168,19 @@ exports.user_check_auth = async (req,res) => {
     }
 
     res.status(200).json(response);
+    } catch (e) {
+        res.status(401).json({
+            message: 'Auth failed'
+        })
+    }
 }
 
-        
+// Logout post request
+exports.user_logout = (req,res) => {
+    // Removing the cookie
+    res.cookie('jwt', '', {maxAge: 0})
+    res.status(200).json({
+        message: 'Logged out'
+    })
+}
+    
