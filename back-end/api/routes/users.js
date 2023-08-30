@@ -23,5 +23,9 @@ router.delete('/:userId', userController.user_delete);
 // Get all users
 router.get('/', userController.user_get_all);
 
+// Login post request
+
+router.post('/login', userController.user_login);
+
 
 module.exports = router

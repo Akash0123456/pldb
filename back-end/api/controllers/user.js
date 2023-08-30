@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
 
 const User = require('../models/user');
 
@@ -93,3 +94,33 @@ exports.user_get_all = (req,res) => {
             });
         });
 }
+
+
+// Login post request
+
+exports.user_login = (req,res) => {
+    User.findOne({email: req.body.email})
+        .then((user) => {
+            if (user) {
+                bcrypt.compare(req.body.password, user.password, (err, result) => {
+                    if (err) {
+                        return res.status(401).json({
+                            message: "Auth failed"
+                        });
+                    }
+
+                    if (result) {
+                        return res.status(200).json({
+                            message: "Auth successful",
+                            user: user
+                        })
+                    }
+
+                    res.status(401).json({
+                        message: "Auth failed"
+                    })
+                })
+            }
+        })
+}
+        
