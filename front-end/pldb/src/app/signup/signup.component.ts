@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import { SignupService } from '../signup.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -10,7 +11,9 @@ import { SignupService } from '../signup.service';
 export class SignupComponent {
 
   // Inject the FormBuilder class to utilize the service
-  constructor(private fb: FormBuilder, private signupService: SignupService){}
+  constructor(private fb: FormBuilder,
+    private signupService: SignupService,
+    private router: Router){}
 
   // Create a form using the service
   registrationForm = this.fb.group({
@@ -24,7 +27,10 @@ export class SignupComponent {
     console.log(this.registrationForm.value);
     this.signupService.signupUser(this.registrationForm.value)
         .subscribe({
-          next: (data) => console.log('Success', data),
+          next: (data) => {
+            console.log('Success');
+            this.router.navigate(['/login']);
+          },
           error: (err) => console.error('Error', err)
         })
   }
