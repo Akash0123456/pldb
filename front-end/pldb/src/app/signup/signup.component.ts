@@ -23,7 +23,7 @@ export class SignupComponent {
   })
 
   // Create a method to submit the form
-  onSubmit(){
+  onSubmit(): void{
     console.log(this.registrationForm.value);
     this.signupService.signupUser(this.registrationForm.value)
         .subscribe({
