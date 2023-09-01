@@ -150,9 +150,12 @@ exports.user_check_auth = async (req,res) => {
     try {
         const cookie = req.cookies['jwt'];
 
-    const claims = jwt.verify(cookie, process.env.JWT_SECRET);
+        const claims = jwt.verify(cookie, process.env.JWT_SECRET);
 
-    // Object with the ID of the user.
+    // claims - Object with the ID of the user.
+    
+    console.log(claims);
+
     if (!claims) {
         return res.status(401).json({
             message: 'Auth failed'
@@ -168,7 +171,8 @@ exports.user_check_auth = async (req,res) => {
     }
 
     res.status(200).json(response);
-    } catch (e) {
+
+    } catch (err) {
         res.status(401).json({
             message: 'Auth failed'
         })
@@ -176,6 +180,7 @@ exports.user_check_auth = async (req,res) => {
 }
 
 // Logout post request
+
 exports.user_logout = (req,res) => {
     // Removing the cookie
     res.cookie('jwt', '', {maxAge: 0})

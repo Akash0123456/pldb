@@ -14,7 +14,7 @@ const User = require('../models/user');
 const userController = require("../controllers/user");
 
 
-// Create a user using a post request - sign-up page
+// Create a user using a post request - register
 router.post('/signup', userController.user_sign_up);
 
 // Delete a user
