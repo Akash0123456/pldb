@@ -1,24 +1,23 @@
-<div class="container-fluid">
-    <h2>Registration Form</h2>
-
+<main class="form-signin w-100 m-auto">
     <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <h1 class="h3 mb-3 fw-normal">Register</h1>
 
-        <div class="form-group">
-            <label>Username</label>
-            <input type="text" class="form-control" formControlName="username">
-        </div>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="floatingInput" formControlName="username">
+        <label for="floatingInput">Username</label>
+      </div>
+  
+      <div class="form-floating">
+        <input type="email" class="form-control" id="floatingInput" formControlName="email">
+        <label for="floatingInput">Email address</label>
+      </div>
 
-        <div class="form-group">
-			<label>Email</label>
-			<input type="text" formControlName="email" class="form-control">
-		</div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" formControlName="password">
+        <label for="floatingPassword">Password</label>
+      </div>
 
-        <div class="form-group">
-			<label>Password	</label>
-			<input formControlName="password" type="password" class="form-control">
-		</div>
-
-        <button class="btn btn-primary" type="submit" [disabled]="registrationForm.invalid">Register</button>
+      <button class="btn btn-primary w-100 py-2" type="submit">Register</button>
+      <p class="mt-5 mb-3 text-body-secondary">&copy; Akash Gampala 2023</p>
     </form>
-
-</div>
+  </main>
