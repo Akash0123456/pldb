@@ -29,7 +29,7 @@ const userRoutes = require('./api/routes/users');
 
 // Route handling
 
-app.use('/users', userRoutes)
+app.use('/users', userRoutes);
 
 // Error handling
 
