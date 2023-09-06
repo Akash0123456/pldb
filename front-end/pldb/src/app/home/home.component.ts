@@ -22,7 +22,7 @@ export class HomeComponent {
             },
             error: (err) => {
               this.message = 'You are not logged in';
-              Emitters.authEmitter.emit(false)
+              Emitters.authEmitter.emit(false);
             }
           })
     }

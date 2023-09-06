@@ -30,6 +30,7 @@ export class NavbarComponent {
             },
             error: (err) => {
               console.log(err);
+              this.authenticated = true;
             }
           })
     } 

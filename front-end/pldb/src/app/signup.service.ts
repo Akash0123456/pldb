@@ -29,7 +29,7 @@ export class SignupService {
   }
 
   logoutUser(){
-    return this.http.post<any>(this.logoutUrl, {});
+    return this.http.post<any>(this.logoutUrl, {}, {withCredentials: true})
   }
 
 }
