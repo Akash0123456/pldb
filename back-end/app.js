@@ -26,10 +26,12 @@ app.use(cors({
 
 // Importing routes
 const userRoutes = require('./api/routes/users');
+const gameRoutes = require('./api/routes/games');
 
 // Route handling
 
 app.use('/users', userRoutes);
+app.use('/games', gameRoutes);
 
 // Error handling
 

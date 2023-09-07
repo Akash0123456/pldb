@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema({
+const gameSchema = new mongoose.Schema({
     // ID
     _id: mongoose.Schema.Types.ObjectId,
 
@@ -25,6 +25,8 @@ const userSchema = new mongoose.Schema({
     // Timestamps
     createdAt: { type: Date, default: Date.now },
     updatedAt: Date
-
-
 })
+
+const Game = mongoose.model('Game', gameSchema);
+
+module.exports = Game;
