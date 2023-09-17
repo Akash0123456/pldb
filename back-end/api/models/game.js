@@ -8,10 +8,8 @@ const gameSchema = new mongoose.Schema({
     date: { type: Date, required: true },
     homeTeam: { type: String, required: true },
     awayTeam: { type: String, required: true },
-    venue: { type: String, required: true },
 
     // Additional game details
-    competition:{type: String}, // e.g., "Premier League," "Champions League"
     season: {type: String}, // e.g., "2022/2023"
     referee: {type: String}, // Name of the referee
 
