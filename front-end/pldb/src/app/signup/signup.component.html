@@ -3,21 +3,56 @@
       <h1 class="h3 mb-3 fw-normal">Register</h1>
 
       <div class="form-floating">
-        <input type="text" class="form-control" id="floatingInput" formControlName="username">
+        <input type="text" class="form-control" id="floatingInput" formControlName="username"
+        [class.is-invalid]="registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched">
         <label for="floatingInput">Username</label>
+
+        <div *ngIf="registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched">
+            <small class="text-danger" *ngIf="registrationForm.get('username')?.errors?.['required']">
+              Username is required.
+            </small>
+
+            <small class="text-danger" *ngIf="registrationForm.get('username')?.errors?.['minlength']">
+              Length must be greater than 4 characters.
+            </small>
+
+            <small class="text-danger" *ngIf="registrationForm.get('username')?.errors?.['forbiddenName']">
+              Username {{registrationForm.get('username')?.getError('forbiddenName')?.forbiddenUsername}} not allowed.
+            </small>
+        </div>
       </div>
   
       <div class="form-floating">
-        <input type="email" class="form-control" id="floatingInput" formControlName="email">
+        <input type="email" class="form-control" id="floatingInput" formControlName="email"
+        [class.is-invalid]="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
         <label for="floatingInput">Email address</label>
+
+        <div *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
+          <small class="text-danger" *ngIf="registrationForm.get('email')?.errors?.['required']">
+            Email is required.
+          </small>
+
+          <small  class="text-danger" *ngIf="registrationForm.get('email')?.hasError('email')">
+            Invalid email format.
+          </small>
+        </div>
+
       </div>
 
       <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" formControlName="password">
+        <input type="password" class="form-control" id="floatingPassword" formControlName="password"
+        [class.is-invalid]="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
         <label for="floatingPassword">Password</label>
+
+        <div *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
+          <small class="text-danger" *ngIf="registrationForm.get('password')?.errors?.['required']">
+            Password is required.
+          </small>
+        </div>
+
       </div>
 
-      <button class="btn btn-primary w-100 py-2" type="submit">Register</button>
+      <button class="btn btn-primary w-100 py-2" type="submit" [disabled]="!registrationForm.valid">Register</button>
       <p class="mt-5 mb-3 text-body-secondary">&copy; Akash Gampala 2023</p>
     </form>
   </main>

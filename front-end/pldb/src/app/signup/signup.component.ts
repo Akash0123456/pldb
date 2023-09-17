@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import { SignupService } from '../signup.service';
 import { Router } from '@angular/router';
+import { forbiddenNameValidator } from '../validators/username.validator';
 
 @Component({
   selector: 'app-signup',
@@ -17,9 +18,9 @@ export class SignupComponent {
 
   // Create a form using the service
   registrationForm = this.fb.group({
-    username: [''],
-    email: [''],
-    password: ['']
+    username: ['', [Validators.required, Validators.minLength(5), forbiddenNameValidator([])]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required]]
   })
 
   // Create a method to submit the form
